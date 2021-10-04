@@ -15,14 +15,15 @@ class MyClass(object):
 
 
 class BoxWindow:
-    """Representation of [a1,b1] x [a2,b2] x ...
+    """Representation of a box defines by [a1,b1] x [a2,b2] x ...
     """
 
     def __init__(self, bounds):
-        """[summary]
+        """Constructor of a BoxWIndow
 
         Args:
-            args ([type]): [description]
+            bounds (numpy.array): The bounds of the box.
+                                It must be of dimension N * 2
         """
 <<<<<<< HEAD
 =======
@@ -32,10 +33,11 @@ class BoxWindow:
         self.bounds = np.array(bounds)
 
     def __repr__(self):
-        """BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+        """Return for example the following string :
+        "BoxWindow: [a_1, b_1] * [a_2, b_2]"
 
         Returns:
-            [type]: [description]
+            String: The representation of the box
         """
 <<<<<<< HEAD
         return " "
@@ -76,9 +78,22 @@ class BoxWindow:
             return s
 
     def __len__(self):
+        """Return the len of the box, ie the dimension.
+
+        Returns:
+            int: the dimension of the box
+        """
         return len(self.bounds)
 
     def __contains__(self, point):
+        """Return True if the point beyonds to the box
+
+        Args:
+            point (numpy.array): the point
+
+        Returns:
+            Boolean: True if the point beyonds to the box
+        """
         assert len(point) == len(self)
         return all(a <= x <= b for (a, b), x in zip(self.bounds, point))
 >>>>>>> 3c636899c387ba3f029a7fbe27a61f7616986909
@@ -90,6 +105,9 @@ class BoxWindow:
 
     def volume(self):
         """[summary]
+
+        Returns:
+            [type]: [description]
         """
         V = 1
         for k in range(0, len(self.bounds)):

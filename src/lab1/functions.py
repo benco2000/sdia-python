@@ -7,6 +7,14 @@ def is_unique(x):
 
 
 def triangle_shape(height):
+    """[summary]
+
+    Args:
+        height ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     if height == 0:
         return ""
     else:

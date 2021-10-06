@@ -4,6 +4,15 @@ import pytest
 from lab2.box_window import BoxWindow
 
 
+<<<<<<< HEAD
+=======
+def test_raise_type_error_when_something_is_called():
+    with pytest.raises(TypeError):
+        # call_something_that_raises_TypeError()
+        raise TypeError()
+
+
+>>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846
 @pytest.mark.parametrize(
     "bounds, expected",
     [
@@ -16,7 +25,11 @@ from lab2.box_window import BoxWindow
     ],
 )
 def test_box_string_representation(bounds, expected):
+<<<<<<< HEAD
     assert repr(BoxWindow(bounds)) == expected
+=======
+    assert str(BoxWindow(bounds)) == expected
+>>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846
 
 
 @pytest.fixture

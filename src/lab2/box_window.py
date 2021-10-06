@@ -16,8 +16,8 @@ class BoxWindow:
         assert len(bounds.T) == 2
         self.bounds = np.array(bounds)
 
-    def __repr__(self):
-        """BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+    def __str__(self):
+        r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
             [type]: [description]
@@ -99,4 +99,4 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
-        super(BoxWindow, self).__init__(args)
+        super(UnitBoxWindow, self).__init__(bounds)

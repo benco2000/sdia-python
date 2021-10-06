@@ -1,18 +1,17 @@
 import numpy as np
 import pytest
 
-from lab2.box_window import BoxWindow
+from lab2.box_window import BoxWindow, UnitBoxWindow
 
 
-<<<<<<< HEAD
-=======
 def test_raise_type_error_when_something_is_called():
     with pytest.raises(TypeError):
         # call_something_that_raises_TypeError()
-        raise TypeError()
+        L = [[1, 2], [3, 4]]
+        box = BoxWindow(L)
+        raise AssertionError()
 
 
->>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846
 @pytest.mark.parametrize(
     "bounds, expected",
     [
@@ -25,11 +24,7 @@ def test_raise_type_error_when_something_is_called():
     ],
 )
 def test_box_string_representation(bounds, expected):
-<<<<<<< HEAD
-    assert repr(BoxWindow(bounds)) == expected
-=======
     assert str(BoxWindow(bounds)) == expected
->>>>>>> b3c697b0cef6e29f9d6feff78d7cc83350a3b846
 
 
 @pytest.fixture
@@ -111,7 +106,7 @@ def test_volume_box(box, expected):
 
 def test_rand_onepoint_onedimension():
     box = BoxWindow(np.array([[1, 2]]))
-    assert box.__contains__(box.rand())
+    assert box.__contains__(box.rand()[0])
 
 
 def test_rand_multiplepoint_3dimension():
@@ -119,3 +114,29 @@ def test_rand_multiplepoint_3dimension():
     coord = box.rand(100)
     for value in coord:
         assert box.__contains__(value)
+
+
+@pytest.mark.parametrize(
+    "dimension, expected",
+    [
+        (1, "BoxWindow: [-0.5, 0.5]"),
+        (2, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5]"),
+        (3, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5] x [-0.5, 0.5]",),
+    ],
+)
+def test_UnitBoxWindow(dimension, expected):
+    unitBox = UnitBoxWindow(dimension)
+    assert unitBox.__str__() == expected
+
+
+@pytest.mark.parametrize(
+    "dimension, center, expected", [(1, np.array([2.5]), "BoxWindow: [2.0, 3.0]"),],
+)
+def test_UnitBoxWindow_with_center_specified(dimension, center, expected):
+    unitBox = UnitBoxWindow(dimension, center)
+    assert unitBox.__str__() == expected
+
+
+def test_UnitBoxWindow_volume():
+    unitBox = UnitBoxWindow(3)
+    assert unitBox.volume() == 1

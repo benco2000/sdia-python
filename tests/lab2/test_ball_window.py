@@ -20,11 +20,7 @@ def test_radius(center, radius, expected):
 
 @pytest.mark.parametrize(
     "box, expected",
-    [
-        (np.array([1]), 1),
-        (np.array([1, 2.2]), 2),
-        (np.array([1.4, 2.6, 3.9]), 3),
-    ],
+    [(np.array([1]), 1), (np.array([1, 2.2]), 2), (np.array([1.4, 2.6, 3.9]), 3),],
 )
 def test_dimension_box(box, expected):
     ball = BallWindow(box, 4)
@@ -91,7 +87,7 @@ def test_indicator_function_twoDimension():
 
 
 # ? does this raise a TypeError or an AssertionError
-def test_raise_type_error_when_points_is_not_of_good_dimension():
+def test_raise_assertion_error_when_points_is_not_of_good_dimension():
     with pytest.raises(AssertionError):
         ball1 = BallWindow(np.array([0, 0]), 1)
         np.array([1, 2, 3]) in ball1

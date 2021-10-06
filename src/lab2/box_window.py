@@ -13,39 +13,28 @@ class BoxWindow:
             bounds (numpy.array): The bounds of the box.
                                 It must be of dimension N * 2
         """
-        # * use isinstance
-        assert type(bounds) == np.ndarray
+        assert isinstance(bounds, np.ndarray)
         # * use .shapes
-        assert len(bounds.T) == 2
-        # ? why converting, bounds is already np.array
-        self.bounds = np.array(bounds)
+        assert bounds.shape[1] == 2
+        assert np.all(np.diff(bounds) >= 0)
+        self.bounds = bounds
 
     def __str__(self):
         """Returns for example the following string :
         "BoxWindow: [a_1, b_1] x [a_2, b_2]"
 
         Returns:
-            # ! str not String
-            String: The representation of the box
+            str: The representation of the box
         """
         s = "BoxWindow: "
         # ! use f-strings
-        if len(self.bounds) > 1:  # ? use self.dimension()
+        if self.dimension() > 1:
             # * consider for a, b in self.bounds[:-1]
-            for k in range(0, len(self.bounds) - 1):
+            for a, b in self.bounds[:-1]:
                 # * use += opereator
-                s = (
-                    s
-                    + "["
-                    + str(self.bounds[k][0])
-                    + ", "
-                    + str(self.bounds[k][1])
-                    + "]"
-                    + " x "
-                )
-        s = (
-            s
-            + "["
+                s += "[" + str(a) + ", " + str(b) + "]" + " x "
+        s += (
+            "["
             + str(self.bounds[len(self.bounds) - 1][0])
             + ", "
             + str(self.bounds[len(self.bounds) - 1][1])
@@ -68,9 +57,9 @@ class BoxWindow:
             point (numpy.array): the point
 
         Returns:
-            Boolean: True if the point beyonds to the box
+            Boolean: True if the point belongs to the box
         """
-        assert len(point) == len(self)  # ! readability: self.dimension()
+        assert len(point) == self.dimension()
         return all(a <= x <= b for (a, b), x in zip(self.bounds, point))
 
     def dimension(self):
@@ -79,8 +68,7 @@ class BoxWindow:
         Returns:
             int: the dimension of the box
         """
-        # ! readability: len(self)
-        return self.__len__()
+        return len(self)
 
     def volume(self):
         """Returns the volume of the box, ie the multiplication of the size of each segment.
@@ -89,12 +77,12 @@ class BoxWindow:
             int: the volume of the box
         """
         # * exploit numpy vectors, use - or np.diff, and np.prod
-        V = 1  # ! naming: V => volume
+        volume = 1
         # * consider for a, b in self.bounds
         for k in range(0, len(self.bounds)):
             # ? why abs, isn't b > a, isn't it tested ?
-            V *= np.abs(self.bounds[k][1] - self.bounds[k][0])
-        return V
+            volume *= np.abs(self.bounds[k][1] - self.bounds[k][0])
+        return volume
 
     def indicator_function(self, point):
         """Returns True if the point beyonds to the box
@@ -106,8 +94,7 @@ class BoxWindow:
             boolean: True if the point beyonds to the box
         """
         # ? how would you handle multiple points
-        # ! readability: point in self
-        return self.__contains__(point)
+        return point in self
 
     def rand(self, n=1, rng=None):
         """Generate n points uniformly at random inside the BoxWindow.

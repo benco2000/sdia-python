@@ -4,10 +4,18 @@ import pytest
 from lab2.box_window import BoxWindow, UnitBoxWindow
 
 
-def test_raise_type_error_when_points_is_not_an_array():
+def test_raise_assertion_error_when_points_is_not_an_array():
     with pytest.raises(AssertionError):
         # call_something_that_raises_TypeError()
         L = [[1, 2], [3, 4]]
+        box = BoxWindow(L)
+        raise AssertionError()
+
+
+def test_raise_assertion_error_when_points_is_not_of_good_dimension():
+    with pytest.raises(AssertionError):
+        # call_something_that_raises_TypeError()
+        L = np.array([1, 2, 3])
         box = BoxWindow(L)
         raise AssertionError()
 
@@ -121,10 +129,7 @@ def test_rand_multiplepoint_3dimension():
     [
         (1, "BoxWindow: [-0.5, 0.5]"),
         (2, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5]"),
-        (
-            3,
-            "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5] x [-0.5, 0.5]",
-        ),
+        (3, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5] x [-0.5, 0.5]",),
     ],
 )
 def test_UnitBoxWindow(dimension, expected):
@@ -133,10 +138,7 @@ def test_UnitBoxWindow(dimension, expected):
 
 
 @pytest.mark.parametrize(
-    "dimension, center, expected",
-    [
-        (1, np.array([2.5]), "BoxWindow: [2.0, 3.0]"),
-    ],
+    "dimension, center, expected", [(1, np.array([2.5]), "BoxWindow: [2.0, 3.0]"),],
 )
 def test_UnitBoxWindow_with_center_specified(dimension, center, expected):
     unitBox = UnitBoxWindow(dimension, center)

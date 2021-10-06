@@ -1,57 +1,27 @@
 from lab2.utils import get_random_number_generator
 import numpy as np
-<<<<<<< HEAD
-
-
-class MyClass(object):
-    def __init__(self, arg):
-        # attributes
-        self.arg = arg
-
-    def add_one_to_arg(self):
-        self.arg += 1
-=======
->>>>>>> 3c636899c387ba3f029a7fbe27a61f7616986909
 
 
 class BoxWindow:
-    """Representation of a box defines by [a1,b1] x [a2,b2] x ...
+    """Representation of [a1,b1] x [a2,b2] x ...
     """
 
     def __init__(self, bounds):
-        """Constructor of a BoxWIndow
+        """[summary]
 
         Args:
-            bounds (numpy.array): The bounds of the box.
-                                It must be of dimension N * 2
+            args ([type]): [description]
         """
-<<<<<<< HEAD
-=======
         assert type(bounds) == np.ndarray
         assert len(bounds.T) == 2
->>>>>>> 3c636899c387ba3f029a7fbe27a61f7616986909
         self.bounds = np.array(bounds)
 
     def __repr__(self):
-        """Return for example the following string :
-        "BoxWindow: [a_1, b_1] * [a_2, b_2]"
+        """BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
-            String: The representation of the box
+            [type]: [description]
         """
-<<<<<<< HEAD
-        return " "
-
-    def __len__(self):
-        return len(self.bounds.shape[0])
-        return len(self.bounds)
-
-    def __contains__(self, point):
-        assert len(point) == len(self)
-        for i in range (len(point)):
-
-        return True or False
-=======
         s = "BoxWindow: "
         if len(self.bounds) == 1:
             s = s + "[" + str(self.bounds[0][0]) + ", " + str(self.bounds[0][1]) + "]"
@@ -78,25 +48,11 @@ class BoxWindow:
             return s
 
     def __len__(self):
-        """Return the len of the box, ie the dimension.
-
-        Returns:
-            int: the dimension of the box
-        """
         return len(self.bounds)
 
     def __contains__(self, point):
-        """Return True if the point beyonds to the box
-
-        Args:
-            point (numpy.array): the point
-
-        Returns:
-            Boolean: True if the point beyonds to the box
-        """
         assert len(point) == len(self)
         return all(a <= x <= b for (a, b), x in zip(self.bounds, point))
->>>>>>> 3c636899c387ba3f029a7fbe27a61f7616986909
 
     def dimension(self):
         """[summary]
@@ -104,10 +60,7 @@ class BoxWindow:
         return self.__len__()
 
     def volume(self):
-        """[summary]
-
-        Returns:
-            [type]: [description]
+        """Return
         """
         V = 1
         for k in range(0, len(self.bounds)):

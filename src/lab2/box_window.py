@@ -14,10 +14,12 @@ class BoxWindow:
         """
         # * use isinstance
         assert type(bounds) == np.ndarray
+        # assert isinstance(bounds, np.ndarray)
         # * use .shapes
-        assert len(bounds.T) == 2
+        # assert len(bounds.T) == 2
+        assert bounds.shapes == 2
         # ? why converting, bounds is already np.array
-        self.bounds = np.array(bounds)
+        ##self.bounds = np.array(bounds)
 
     def __str__(self):
         """Returns for example the following string :
@@ -25,11 +27,12 @@ class BoxWindow:
 
         Returns:
             # ! str not String
-            String: The representation of the box
+            Str: The representation of the box
         """
         s = "BoxWindow: "
         # ! use f-strings
         if len(self.bounds) > 1:  # ? use self.dimension()
+            # if self.dimension() > 1:
             # * consider for a, b in self.bounds[:-1]
             for k in range(0, len(self.bounds) - 1):
                 # * use += opereator

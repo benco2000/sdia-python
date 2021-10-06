@@ -5,7 +5,7 @@ from lab2.box_window import BoxWindow, UnitBoxWindow
 
 
 def test_raise_type_error_when_something_is_called():
-    with pytest.raises(TypeError):
+    with pytest.raises(AssertionError):
         # call_something_that_raises_TypeError()
         L = [[1, 2], [3, 4]]
         box = BoxWindow(L)

@@ -12,6 +12,14 @@ def test_raise_type_error_when_something_is_called():
         raise AssertionError()
 
 
+def test_raise_assertion_error_when_points_is_not_of_good_dimension():
+    with pytest.raises(AssertionError):
+        # call_something_that_raises_TypeError()
+        L = np.array([1, 2, 3])
+        box = BoxWindow(L)
+        raise AssertionError()
+
+
 @pytest.mark.parametrize(
     "bounds, expected",
     [
